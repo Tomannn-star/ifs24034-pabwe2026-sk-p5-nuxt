@@ -20,6 +20,13 @@ describe("SidebarComponent", () => {
     const backdrop = wrapper.find(".fixed.inset-0");
     await backdrop.trigger("click");
     expect(wrapper.emitted("close")).toBeTruthy();
+
+    const closeBtn = wrapper.find("button");
+    await closeBtn.trigger("click");
+
+    const link = wrapper.find("a");
+    await link.trigger("click");
+    expect(wrapper.emitted("close")?.length).toBe(3);
   });
 });
 

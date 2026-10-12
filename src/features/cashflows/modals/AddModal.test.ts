@@ -81,4 +81,13 @@ describe("AddModal", () => {
 
     expect(wrapper.emitted("success")).toBeFalsy();
   });
+
+  it("should show loading button text when isCashFlowAdd is true", () => {
+    const cashFlowsStore = useCashFlowsStore();
+    cashFlowsStore.isCashFlowAdd = true;
+    const wrapper = mount(AddModal, {
+      props: { isOpen: true },
+    });
+    expect(wrapper.find("button[type='submit']").text()).toBe("Menyimpan...");
+  });
 });

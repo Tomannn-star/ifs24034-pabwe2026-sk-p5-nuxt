@@ -33,12 +33,14 @@ describe("UsersPage", () => {
     usersStore.users = [
       { id: 1, name: "Alice", email: "alice@delcom.org", photo_url: "https://photo.url" },
       { id: 2, name: "Bob", email: "bob@delcom.org" },
+      { id: 3, name: "", email: "anon@delcom.org" },
     ];
     vi.spyOn(usersStore, "fetchUsers").mockResolvedValue({ success: true } as any);
 
     const wrapper = mount(UsersPage);
     expect(wrapper.text()).toContain("Alice");
     expect(wrapper.text()).toContain("bob@delcom.org");
+    expect(wrapper.text()).toContain("U");
     expect(wrapper.findAll("img").length).toBe(1);
   });
 });

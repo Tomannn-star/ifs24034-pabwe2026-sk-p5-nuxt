@@ -81,4 +81,11 @@ describe("RegisterPage", () => {
 
     expect(mockPush).not.toHaveBeenCalled();
   });
+
+  it("should show loading text when registering", () => {
+    const store = useAuthStore();
+    store.isAuthRegister = true;
+    const wrapper = mount(RegisterPage, { global: { stubs: customStubs } });
+    expect(wrapper.find("button[type='submit']").text()).toBe("Memproses...");
+  });
 });

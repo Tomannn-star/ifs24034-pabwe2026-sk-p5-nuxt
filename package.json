@@ -18,7 +18,7 @@
     "@toast-ui/editor": "^3.2.2",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^1.0.0",
-    "nuxt": "^4.0.0",
+    "nuxt": "4.6.1",
     "pinia": "^4.0.3",
     "sweetalert2": "^11.26.25",
     "tailwind-merge": "^3.7.0",
@@ -43,4 +43,3 @@
     "vue-tsc": "^3.3.12"
   }
 }
-

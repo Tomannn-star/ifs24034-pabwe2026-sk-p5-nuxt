@@ -151,5 +151,77 @@ describe("cashFlowsStore", () => {
     expect(store.isCashFlowDeletedAll).toBe(true);
     expect(store.cashFlows.length).toBe(0);
   });
+
+  it("should handle error in fetchCashFlows and empty res.data", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "getCashFlowsApi").mockRejectedValue(new Error("Fetch flows error"));
+    await expect(store.fetchCashFlows()).rejects.toThrow("Fetch flows error");
+    expect(store.error).toBe("Fetch flows error");
+
+    vi.spyOn(cashFlowApi, "getCashFlowsApi").mockResolvedValue({});
+    await store.fetchCashFlows();
+  });
+
+  it("should handle error in fetchCashFlowDetail and empty res.data", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "getCashFlowDetailApi").mockRejectedValue(new Error("Detail error"));
+    await expect(store.fetchCashFlowDetail(1)).rejects.toThrow("Detail error");
+    expect(store.error).toBe("Detail error");
+
+    vi.spyOn(cashFlowApi, "getCashFlowDetailApi").mockResolvedValue({});
+    await store.fetchCashFlowDetail(1);
+  });
+
+  it("should handle error in addCashFlow", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "addCashFlowApi").mockRejectedValue(new Error("Add error"));
+    await expect(store.addCashFlow({ type: "inflow", source: "cash", label: "L", nominal: 100 })).rejects.toThrow("Add error");
+
+    vi.spyOn(cashFlowApi, "addCashFlowApi").mockRejectedValue(new Error(""));
+    await expect(store.addCashFlow({ type: "inflow", source: "cash", label: "L", nominal: 100 })).rejects.toThrow();
+  });
+
+  it("should handle error in updateCashFlow and when cashFlow is null", async () => {
+    const store = useCashFlowsStore();
+    store.cashFlow = null;
+    vi.spyOn(cashFlowApi, "updateCashFlowApi").mockResolvedValue({ message: "OK" });
+    await store.updateCashFlow(1, { nominal: 50 });
+
+    vi.spyOn(cashFlowApi, "updateCashFlowApi").mockRejectedValue(new Error("Update error"));
+    await expect(store.updateCashFlow(1, {})).rejects.toThrow("Update error");
+
+    vi.spyOn(cashFlowApi, "updateCashFlowApi").mockRejectedValue(new Error(""));
+    await expect(store.updateCashFlow(1, {})).rejects.toThrow();
+  });
+
+  it("should handle error in deleteCashFlow", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "deleteCashFlowApi").mockRejectedValue(new Error("Del error"));
+    await expect(store.deleteCashFlow(1)).rejects.toThrow("Del error");
+
+    vi.spyOn(cashFlowApi, "deleteCashFlowApi").mockRejectedValue(new Error(""));
+    await expect(store.deleteCashFlow(1)).rejects.toThrow();
+  });
+
+  it("should handle error in deleteAllCashFlows", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "deleteAllCashFlowsApi").mockRejectedValue(new Error("Del all error"));
+    await expect(store.deleteAllCashFlows()).rejects.toThrow("Del all error");
+
+    vi.spyOn(cashFlowApi, "deleteAllCashFlowsApi").mockRejectedValue(new Error(""));
+    await expect(store.deleteAllCashFlows()).rejects.toThrow();
+  });
+
+  it("should handle empty data in fetchLabels, fetchDailyStats, fetchMonthlyStats", async () => {
+    const store = useCashFlowsStore();
+    vi.spyOn(cashFlowApi, "getCashFlowLabelsApi").mockResolvedValue({});
+    await store.fetchLabels();
+
+    vi.spyOn(cashFlowApi, "getDailyStatsApi").mockResolvedValue({});
+    await store.fetchDailyStats();
+
+    vi.spyOn(cashFlowApi, "getMonthlyStatsApi").mockResolvedValue({});
+    await store.fetchMonthlyStats();
+  });
 });
 

@@ -57,12 +57,15 @@ describe("ChangeModal", () => {
       props: { isOpen: true, cashFlow: mockCashFlow },
     });
 
+    await wrapper.find("select#edit-type").setValue("outflow");
+    await wrapper.find("select#edit-source").setValue("savings");
     await wrapper.find("input#edit-nominal").setValue("6000000");
+    await wrapper.find("textarea#edit-description").setValue("New desc");
     await wrapper.find("form").trigger("submit.prevent");
 
     expect(updateSpy).toHaveBeenCalledWith(
       1,
-      expect.objectContaining({ nominal: 6000000 })
+      expect.objectContaining({ nominal: 6000000, type: "outflow", source: "savings", description: "New desc" })
     );
     expect(wrapper.emitted("success")).toBeTruthy();
     expect(wrapper.emitted("close")).toBeTruthy();
@@ -78,5 +81,28 @@ describe("ChangeModal", () => {
 
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.emitted("success")).toBeFalsy();
+  });
+
+  it("should handle cashFlow with fallback values and isCashFlowChange loading state", async () => {
+    const cashFlowsStore = useCashFlowsStore();
+    cashFlowsStore.isCashFlowChange = true;
+
+    const wrapper = mount(ChangeModal, {
+      props: {
+        isOpen: true,
+        cashFlow: { id: 2, type: null, source: null, label: null, nominal: 0, description: null },
+      },
+    });
+
+    expect(wrapper.find("button[type='submit']").text()).toBe("Menyimpan...");
+    const closeBtn = wrapper.find("button.p-1");
+    await closeBtn.trigger("click");
+    expect(wrapper.emitted("close")).toBeTruthy();
+
+    const cancelBtn = wrapper.findAll("button").find((b) => b.text().includes("Batal"));
+    await cancelBtn?.trigger("click");
+
+    const backdrop = wrapper.find(".fixed.inset-0.bg-slate-900\\/50");
+    await backdrop.trigger("click");
   });
 });

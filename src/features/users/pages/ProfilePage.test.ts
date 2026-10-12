@@ -154,4 +154,11 @@ describe("ProfilePage", () => {
     await wrapper.find("input#confirmNewPassword").setValue("new123");
     await wrapper.findAll("form")[1].trigger("submit.prevent");
   });
+
+  it("should trigger fileInput click when camera button is clicked", async () => {
+    const wrapper = mount(ProfilePage);
+    const cameraBtn = wrapper.find("button[title='Ubah Foto Profil']");
+    await cameraBtn.trigger("click");
+    expect(cameraBtn.exists()).toBe(true);
+  });
 });

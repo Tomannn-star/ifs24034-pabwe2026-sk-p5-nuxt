@@ -62,5 +62,29 @@ describe("authStore", () => {
     expect(store.token).toBeNull();
     expect(localStorage.getItem("accessToken")).toBeNull();
   });
+
+  it("should handle login rejection with message and fallback", async () => {
+    const store = useAuthStore();
+    vi.spyOn(authApi, "loginApi").mockRejectedValue(new Error("Login error"));
+    await expect(store.login({})).rejects.toThrow("Login error");
+    expect(store.error).toBe("Login error");
+
+    vi.spyOn(authApi, "loginApi").mockRejectedValue(new Error(""));
+    await expect(store.login({})).rejects.toThrow();
+  });
+
+  it("should handle register rejection with message, fallback, and register without message", async () => {
+    const store = useAuthStore();
+    vi.spyOn(authApi, "registerApi").mockRejectedValue(new Error("Reg error"));
+    await expect(store.register({})).rejects.toThrow("Reg error");
+    expect(store.error).toBe("Reg error");
+
+    vi.spyOn(authApi, "registerApi").mockRejectedValue(new Error(""));
+    await expect(store.register({})).rejects.toThrow();
+
+    vi.spyOn(authApi, "registerApi").mockResolvedValue({});
+    const res = await store.register({});
+    expect(res).toEqual({});
+  });
 });
 
