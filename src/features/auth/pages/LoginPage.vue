@@ -31,9 +31,11 @@ async function handleSubmit() {
 <template>
   <form @submit.prevent="handleSubmit" class="mt-6 space-y-4">
     <div>
-      <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+      <label for="login-email-input" class="block text-sm font-medium text-slate-700">Email</label>
       <input
-        id="email"
+        id="login-email-input"
+        name="email"
+        data-testid="login-email-input"
         type="email"
         :value="email"
         @input="onEmailChange"
@@ -44,9 +46,11 @@ async function handleSubmit() {
     </div>
 
     <div>
-      <label for="password" class="block text-sm font-medium text-slate-700">Kata Sandi</label>
+      <label for="login-password-input" class="block text-sm font-medium text-slate-700">Kata Sandi</label>
       <input
-        id="password"
+        id="login-password-input"
+        name="password"
+        data-testid="login-password-input"
         type="password"
         :value="password"
         @input="onPasswordChange"
@@ -57,6 +61,8 @@ async function handleSubmit() {
     </div>
 
     <button
+      id="login-submit-button"
+      data-testid="login-submit-button"
       type="submit"
       :disabled="authStore.isAuthLogin"
       class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition"

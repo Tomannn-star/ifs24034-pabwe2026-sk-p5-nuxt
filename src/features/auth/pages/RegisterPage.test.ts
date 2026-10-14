@@ -40,10 +40,10 @@ describe("RegisterPage", () => {
     const errorSpy = vi.spyOn(toolsHelper, "showErrorDialog").mockResolvedValue({} as any);
     const wrapper = mount(RegisterPage, { global: { stubs: customStubs } });
 
-    await wrapper.find("input#name").setValue("Toman");
-    await wrapper.find("input#email").setValue("toman@delcom.org");
-    await wrapper.find("input#password").setValue("pass123");
-    await wrapper.find("input#confirmPassword").setValue("mismatch");
+    await wrapper.find("input#register-name-input").setValue("Toman");
+    await wrapper.find("input#register-email-input").setValue("toman@delcom.org");
+    await wrapper.find("input#register-password-input").setValue("pass123");
+    await wrapper.find("input#register-confirm-password-input").setValue("mismatch");
     await wrapper.find("form").trigger("submit.prevent");
 
     expect(errorSpy).toHaveBeenCalledWith("Konfirmasi kata sandi tidak cocok!");
@@ -54,10 +54,10 @@ describe("RegisterPage", () => {
     const registerSpy = vi.spyOn(store, "register").mockResolvedValue({ success: true } as any);
 
     const wrapper = mount(RegisterPage, { global: { stubs: customStubs } });
-    await wrapper.find("input#name").setValue("Toman");
-    await wrapper.find("input#email").setValue("toman@delcom.org");
-    await wrapper.find("input#password").setValue("pass123");
-    await wrapper.find("input#confirmPassword").setValue("pass123");
+    await wrapper.find("input#register-name-input").setValue("Toman");
+    await wrapper.find("input#register-email-input").setValue("toman@delcom.org");
+    await wrapper.find("input#register-password-input").setValue("pass123");
+    await wrapper.find("input#register-confirm-password-input").setValue("pass123");
     await wrapper.find("form").trigger("submit.prevent");
 
     expect(registerSpy).toHaveBeenCalledWith({
@@ -73,10 +73,10 @@ describe("RegisterPage", () => {
     vi.spyOn(store, "register").mockRejectedValue(new Error("Fail"));
 
     const wrapper = mount(RegisterPage, { global: { stubs: customStubs } });
-    await wrapper.find("input#name").setValue("Toman");
-    await wrapper.find("input#email").setValue("toman@delcom.org");
-    await wrapper.find("input#password").setValue("pass123");
-    await wrapper.find("input#confirmPassword").setValue("pass123");
+    await wrapper.find("input#register-name-input").setValue("Toman");
+    await wrapper.find("input#register-email-input").setValue("toman@delcom.org");
+    await wrapper.find("input#register-password-input").setValue("pass123");
+    await wrapper.find("input#register-confirm-password-input").setValue("pass123");
     await wrapper.find("form").trigger("submit.prevent");
 
     expect(mockPush).not.toHaveBeenCalled();
@@ -86,6 +86,6 @@ describe("RegisterPage", () => {
     const store = useAuthStore();
     store.isAuthRegister = true;
     const wrapper = mount(RegisterPage, { global: { stubs: customStubs } });
-    expect(wrapper.find("button[type='submit']").text()).toBe("Memproses...");
+    expect(wrapper.find("button#register-submit-button").text()).toBe("Memproses...");
   });
 });

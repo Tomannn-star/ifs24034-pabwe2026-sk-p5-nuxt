@@ -39,9 +39,11 @@ async function handleSubmit() {
 <template>
   <form @submit.prevent="handleSubmit" class="mt-6 space-y-4">
     <div>
-      <label for="name" class="block text-sm font-medium text-slate-700">Nama Lengkap</label>
+      <label for="register-name-input" class="block text-sm font-medium text-slate-700">Nama Lengkap</label>
       <input
-        id="name"
+        id="register-name-input"
+        name="name"
+        data-testid="register-name-input"
         type="text"
         :value="name"
         @input="onNameChange"
@@ -52,9 +54,11 @@ async function handleSubmit() {
     </div>
 
     <div>
-      <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+      <label for="register-email-input" class="block text-sm font-medium text-slate-700">Email</label>
       <input
-        id="email"
+        id="register-email-input"
+        name="email"
+        data-testid="register-email-input"
         type="email"
         :value="email"
         @input="onEmailChange"
@@ -65,9 +69,11 @@ async function handleSubmit() {
     </div>
 
     <div>
-      <label for="password" class="block text-sm font-medium text-slate-700">Kata Sandi</label>
+      <label for="register-password-input" class="block text-sm font-medium text-slate-700">Kata Sandi</label>
       <input
-        id="password"
+        id="register-password-input"
+        name="password"
+        data-testid="register-password-input"
         type="password"
         :value="password"
         @input="onPasswordChange"
@@ -78,9 +84,11 @@ async function handleSubmit() {
     </div>
 
     <div>
-      <label for="confirmPassword" class="block text-sm font-medium text-slate-700">Konfirmasi Kata Sandi</label>
+      <label for="register-confirm-password-input" class="block text-sm font-medium text-slate-700">Konfirmasi Kata Sandi</label>
       <input
-        id="confirmPassword"
+        id="register-confirm-password-input"
+        name="confirmPassword"
+        data-testid="register-confirm-password-input"
         type="password"
         :value="confirmPassword"
         @input="onConfirmPasswordChange"
@@ -91,6 +99,8 @@ async function handleSubmit() {
     </div>
 
     <button
+      id="register-submit-button"
+      data-testid="register-submit-button"
       type="submit"
       :disabled="authStore.isAuthRegister"
       class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition"
