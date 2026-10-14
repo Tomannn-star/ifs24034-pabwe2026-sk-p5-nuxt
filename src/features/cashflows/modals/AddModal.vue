@@ -68,7 +68,12 @@ async function handleSubmit() {
       <div class="relative w-full max-w-lg bg-white rounded-2xl shadow-xl border border-slate-200 p-6 z-10 space-y-5">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <h3 class="text-lg font-bold text-slate-900">Catat Transaksi Arus Kas</h3>
-          <button @click="handleClose" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <button
+            type="button"
+            @click="handleClose"
+            aria-label="Tutup dialog"
+            class="p-1 rounded-lg text-slate-500 hover:text-slate-600 hover:bg-slate-100"
+          >
             <X class="w-5 h-5" />
           </button>
         </div>

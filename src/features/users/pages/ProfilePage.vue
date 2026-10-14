@@ -102,13 +102,14 @@ async function handleChangePassword() {
           @click="$refs.fileInput?.click()"
           class="absolute bottom-0 right-0 p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 shadow-md transition"
           title="Ubah Foto Profil"
+          aria-label="Ubah Foto Profil"
         >
           <Camera class="w-4 h-4" />
         </button>
       </div>
 
       <div class="text-center sm:text-left flex-1">
-        <h3 class="text-lg font-bold text-slate-900">{{ usersStore.profile?.name || "Memuat..." }}</h3>
+        <h2 class="text-lg font-bold text-slate-900">{{ usersStore.profile?.name || "Memuat..." }}</h2>
         <p class="text-sm text-slate-500">{{ usersStore.profile?.email || "-" }}</p>
       </div>
     </div>

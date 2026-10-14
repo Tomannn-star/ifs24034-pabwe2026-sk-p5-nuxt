@@ -25,7 +25,7 @@ onMounted(async () => {
     </div>
 
     <div v-else-if="usersStore.users.length === 0" class="text-center py-12 bg-white rounded-xl border border-slate-200">
-      <UserCheck class="w-12 h-12 text-slate-400 mx-auto mb-3" />
+      <UserCheck class="w-12 h-12 text-slate-500 mx-auto mb-3" />
       <p class="text-slate-600 font-medium">Belum ada pengguna lain terdaftar.</p>
     </div>
 
@@ -47,9 +47,9 @@ onMounted(async () => {
           </span>
         </div>
         <div class="min-w-0 flex-1">
-          <h3 class="text-base font-semibold text-slate-900 truncate">{{ user.name }}</h3>
+          <h2 class="text-base font-semibold text-slate-900 truncate">{{ user.name }}</h2>
           <p class="text-sm text-slate-500 truncate">{{ user.email }}</p>
-          <p class="text-xs text-slate-400 mt-1">Bergabung: {{ formatDate(user.created_at) }}</p>
+          <p class="text-xs text-slate-600 mt-1">Bergabung: {{ formatDate(user.created_at) }}</p>
         </div>
       </div>
     </div>

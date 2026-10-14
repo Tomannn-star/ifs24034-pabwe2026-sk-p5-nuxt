@@ -124,7 +124,7 @@ async function handleDeleteAll() {
         <button
           v-if="cashFlowsStore.cashFlows.length > 0"
           @click="handleDeleteAll"
-          class="flex items-center space-x-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl text-sm font-medium transition"
+          class="flex items-center space-x-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-sm font-medium transition"
         >
           <Trash2 class="w-4 h-4" />
           <span>Hapus Semua</span>
@@ -149,11 +149,11 @@ async function handleDeleteAll() {
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
         <div class="flex items-center justify-between">
           <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pemasukan</span>
-          <div class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
+          <div class="p-2 bg-emerald-50 text-emerald-700 rounded-xl">
             <TrendingUp class="w-4 h-4" />
           </div>
         </div>
-        <p class="text-lg font-bold text-emerald-600 mt-2 truncate">
+        <p class="text-lg font-bold text-emerald-700 mt-2 truncate">
           {{ formatRupiah(cashFlowsStore.stats?.total_inflow || 0) }}
         </p>
       </div>
@@ -161,11 +161,11 @@ async function handleDeleteAll() {
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
         <div class="flex items-center justify-between">
           <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Pengeluaran</span>
-          <div class="p-2 bg-rose-50 text-rose-600 rounded-xl">
+          <div class="p-2 bg-rose-50 text-rose-700 rounded-xl">
             <TrendingDown class="w-4 h-4" />
           </div>
         </div>
-        <p class="text-lg font-bold text-rose-600 mt-2 truncate">
+        <p class="text-lg font-bold text-rose-700 mt-2 truncate">
           {{ formatRupiah(cashFlowsStore.stats?.total_outflow || 0) }}
         </p>
       </div>
@@ -217,6 +217,7 @@ async function handleDeleteAll() {
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
         <select
           v-model="filterType"
+          aria-label="Filter tipe transaksi"
           class="rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
         >
           <option value="">Semua Tipe</option>
@@ -226,6 +227,7 @@ async function handleDeleteAll() {
 
         <select
           v-model="filterSource"
+          aria-label="Filter sumber dana"
           class="rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
         >
           <option value="">Semua Sumber</option>
@@ -237,6 +239,7 @@ async function handleDeleteAll() {
         <input
           v-model="filterLabel"
           type="text"
+          aria-label="Filter kategori atau label"
           placeholder="Kategori / Label"
           class="rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
         />
@@ -244,12 +247,14 @@ async function handleDeleteAll() {
         <input
           v-model="filterStartDate"
           type="date"
+          aria-label="Filter tanggal mulai"
           class="rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
         />
 
         <input
           v-model="filterEndDate"
           type="date"
+          aria-label="Filter tanggal selesai"
           class="rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-blue-500"
         />
       </div>
@@ -325,7 +330,7 @@ async function handleDeleteAll() {
               <td
                 :class="[
                   'px-6 py-4 font-bold whitespace-nowrap',
-                  item.type === 'inflow' ? 'text-emerald-600' : 'text-rose-600',
+                  item.type === 'inflow' ? 'text-emerald-700' : 'text-rose-700',
                 ]"
               >
                 {{ item.type === 'inflow' ? '+' : '-' }} {{ formatRupiah(item.nominal) }}
@@ -335,23 +340,29 @@ async function handleDeleteAll() {
               </td>
               <td class="px-6 py-4 text-right whitespace-nowrap space-x-2">
                 <button
+                  type="button"
                   @click="router.push(`/cash-flows/${item.id}`)"
-                  class="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                  class="p-1.5 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
                   title="Lihat Rincian"
+                  aria-label="Lihat Rincian"
                 >
                   <Eye class="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   @click="openChangeModal(item)"
-                  class="p-1.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
+                  class="p-1.5 text-slate-500 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition"
                   title="Ubah"
+                  aria-label="Ubah"
                 >
                   <Edit2 class="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   @click="handleDelete(item.id)"
-                  class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition"
+                  class="p-1.5 text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition"
                   title="Hapus"
+                  aria-label="Hapus"
                 >
                   <Trash2 class="w-4 h-4" />
                 </button>

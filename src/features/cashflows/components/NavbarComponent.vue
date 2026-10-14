@@ -26,6 +26,7 @@ function handleLogout() {
         <button
           type="button"
           @click="$emit('toggleSidebar')"
+          aria-label="Buka navigasi sidebar"
           class="p-2 rounded-lg text-slate-500 hover:text-slate-600 hover:bg-slate-100 lg:hidden focus:outline-none"
         >
           <Menu class="w-6 h-6" />
@@ -50,6 +51,7 @@ function handleLogout() {
         <button
           type="button"
           @click="handleLogout"
+          aria-label="Keluar dari akun"
           class="flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition"
         >
           <LogOut class="w-4 h-4" />

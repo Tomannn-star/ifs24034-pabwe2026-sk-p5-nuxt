@@ -27,8 +27,9 @@ export function renderWithProviders(component: any, options: Record<string, any>
     history: createMemoryHistory(),
     routes: routes as any,
   });
+  router.onError(() => {});
 
-  router.push(initialRoute);
+  router.push(initialRoute).catch(() => {});
 
   const wrapper = mount(component, {
     props,

@@ -5,7 +5,7 @@ const customPort = Number(process.env.APP_PORT || process.env.PORT) || 3000;
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   telemetry: false,
 
   // Disable SSR for SPA mode (client-side routing and storage)
@@ -21,6 +21,14 @@ export default defineNuxtConfig({
 
   modules: ["@pinia/nuxt"],
 
+  routeRules: {
+    "/**": {
+      headers: {
+        "cache-control": "public, max-age=0, must-revalidate",
+      },
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()],
     define: {
@@ -34,10 +42,12 @@ export default defineNuxtConfig({
         output: {
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              if (id.includes("@toast-ui")) {
-                return "toast-ui";
+              if (id.includes("sweetalert2")) {
+                return "sweetalert2";
               }
-              return "vendor";
+              if (id.includes("lucide-vue-next")) {
+                return "icons";
+              }
             }
           },
         },
@@ -62,6 +72,16 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "id",
       },
+      meta: [
+        {
+          name: "description",
+          content: "Delcom Cash Flow - Aplikasi manajemen pencatatan keuangan dan arus kas pribadi yang praktis, cepat, dan aman.",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+      ],
       link: [
         { rel: "icon", type: "image/svg+xml", href: "/logo.svg" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -71,8 +91,20 @@ export default defineNuxtConfig({
           crossorigin: "",
         },
         {
+          rel: "preload",
+          as: "style",
+          href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap",
+        },
+        {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap",
+          media: "print",
+          onload: "this.media='all'",
+        },
+      ],
+      noscript: [
+        {
+          children: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap">',
         },
       ],
       bodyAttrs: {

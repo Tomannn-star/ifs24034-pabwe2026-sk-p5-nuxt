@@ -99,7 +99,7 @@ async function handleDelete() {
           <p
             :class="[
               'text-3xl font-extrabold tracking-tight mt-1',
-              cashFlowsStore.cashFlow.type === 'inflow' ? 'text-emerald-600' : 'text-rose-600',
+              cashFlowsStore.cashFlow.type === 'inflow' ? 'text-emerald-700' : 'text-rose-700',
             ]"
           >
             {{ cashFlowsStore.cashFlow.type === 'inflow' ? '+' : '-' }}
@@ -110,7 +110,7 @@ async function handleDelete() {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="flex items-start space-x-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <Wallet class="w-5 h-5 text-slate-400 mt-0.5" />
+          <Wallet class="w-5 h-5 text-slate-500 mt-0.5" />
           <div>
             <p class="text-xs text-slate-500 font-medium">Sumber Dana</p>
             <p class="text-sm font-semibold text-slate-800 capitalize mt-0.5">
@@ -120,7 +120,7 @@ async function handleDelete() {
         </div>
 
         <div class="flex items-start space-x-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <Tag class="w-5 h-5 text-slate-400 mt-0.5" />
+          <Tag class="w-5 h-5 text-slate-500 mt-0.5" />
           <div>
             <p class="text-xs text-slate-500 font-medium">Kategori / Label</p>
             <p class="text-sm font-semibold text-slate-800 mt-0.5">
@@ -130,7 +130,7 @@ async function handleDelete() {
         </div>
 
         <div class="flex items-start space-x-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <Calendar class="w-5 h-5 text-slate-400 mt-0.5" />
+          <Calendar class="w-5 h-5 text-slate-500 mt-0.5" />
           <div>
             <p class="text-xs text-slate-500 font-medium">Waktu Transaksi Dicatat</p>
             <p class="text-sm font-semibold text-slate-800 mt-0.5">
@@ -140,7 +140,7 @@ async function handleDelete() {
         </div>
 
         <div class="flex items-start space-x-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <Calendar class="w-5 h-5 text-slate-400 mt-0.5" />
+          <Calendar class="w-5 h-5 text-slate-500 mt-0.5" />
           <div>
             <p class="text-xs text-slate-500 font-medium">Terakhir Diperbarui</p>
             <p class="text-sm font-semibold text-slate-800 mt-0.5">
@@ -152,7 +152,7 @@ async function handleDelete() {
 
       <div class="space-y-2 pt-2">
         <div class="flex items-center space-x-2 text-slate-700 font-semibold text-sm">
-          <FileText class="w-4 h-4 text-slate-400" />
+          <FileText class="w-4 h-4 text-slate-500" />
           <span>Keterangan Tambahan</span>
         </div>
         <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-700 leading-relaxed min-h-[5rem]">

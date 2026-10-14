@@ -6,7 +6,7 @@ const router = useRouter();
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
+  <main class="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
     <div class="max-w-md w-full text-center bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
       <div class="inline-flex p-3 rounded-2xl bg-rose-50 text-rose-600 mb-2">
         <AlertCircle class="w-10 h-10" />
@@ -18,6 +18,7 @@ const router = useRouter();
       </p>
       <div class="pt-2">
         <button
+          type="button"
           @click="router.push('/')"
           class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition"
         >
@@ -26,6 +27,6 @@ const router = useRouter();
         </button>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 

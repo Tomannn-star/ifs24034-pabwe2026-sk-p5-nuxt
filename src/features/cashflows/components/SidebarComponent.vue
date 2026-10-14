@@ -46,6 +46,7 @@ function isActive(href) {
         <button
           type="button"
           @click="$emit('close')"
+          aria-label="Tutup navigasi sidebar"
           class="p-2 text-slate-500 hover:text-slate-700 rounded-lg hover:bg-slate-100"
         >
           <X class="w-5 h-5" />
@@ -70,7 +71,7 @@ function isActive(href) {
         </router-link>
       </nav>
 
-      <div class="p-4 border-t border-slate-100 text-xs text-slate-400 text-center">
+      <div class="p-4 border-t border-slate-100 text-xs text-slate-500 text-center">
         &copy; 2026 Delcom Cash Flow
       </div>
     </aside>
