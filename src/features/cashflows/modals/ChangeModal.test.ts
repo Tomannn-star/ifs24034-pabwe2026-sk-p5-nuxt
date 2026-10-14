@@ -105,4 +105,16 @@ describe("ChangeModal", () => {
     const backdrop = wrapper.find(".fixed.inset-0.bg-slate-900\\/50");
     await backdrop.trigger("click");
   });
+
+  it("should handle null or undefined cashFlow in watch", async () => {
+    const wrapper = mount(ChangeModal, {
+      props: { isOpen: true, cashFlow: null },
+    });
+    expect(wrapper.find("form").exists()).toBe(false);
+    await wrapper.setProps({ cashFlow: mockCashFlow });
+    expect(wrapper.find("form").exists()).toBe(true);
+    expect((wrapper.find("input#edit-label").element as HTMLInputElement).value).toBe("Gaji Pokok");
+    await wrapper.setProps({ cashFlow: null });
+    expect(wrapper.find("form").exists()).toBe(false);
+  });
 });

@@ -22,10 +22,19 @@ export function renderWithProviders(component: any, options: Record<string, any>
     ...mountOptions
   } = options;
 
+  const defaultTestRoutes = [
+    { path: "/", component: { template: "<div />" } },
+    { path: "/auth/login", component: { template: "<div />" } },
+    { path: "/auth/register", component: { template: "<div />" } },
+    { path: "/users", component: { template: "<div />" } },
+    { path: "/profile", component: { template: "<div />" } },
+    { path: "/:pathMatch(.*)*", component: { template: "<div />" } },
+  ];
+
   const pinia = options.pinia || createMockPinia(initialState);
   const router = options.router || createRouter({
     history: createMemoryHistory(),
-    routes: routes as any,
+    routes: (options.routes || defaultTestRoutes) as any,
   });
   router.onError(() => {});
 
