@@ -66,6 +66,10 @@ pipeline {
                 sh '''
                     set -e
 
+                    echo "=== Preparing Nuxt Types and TSConfig ==="
+
+                    npx nuxt prepare
+
                     echo "=== Running Tests with Coverage ==="
 
                     npx vitest run --coverage
